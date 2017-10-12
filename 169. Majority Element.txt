@@ -1,0 +1,58 @@
+169. Majority Element
+
+C++语言：
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+//        sort(nums.begin(),nums.end());
+//        return nums[nums.size()/2];
+        unordered_map<int,int>  map;
+        for(int i=0;i<nums.size();i++)
+            if (map.find(nums[i]) == map.end())
+                map[nums[i]] = 1;
+            else
+                map[nums[i]] = map[nums[i]]+1;
+        for(auto iter = map.begin();iter != map.end();iter++ ) 
+            if (iter->second > nums.size()/2)
+                return iter->first;
+    }
+    
+};
+
+Python语言：
+
+方法一：
+class Solution(object):
+    def majorityElement(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        dic={}
+        for i in nums:
+            if i not in dic:
+                dic[i]=1
+            else:
+                dic[i]=dic[i]+1;
+        for k in dic.keys():
+            if dic[k] > len(nums)/2:
+                return k
+        
+方法二：
+class Solution(object):
+    def majorityElement(self, nums):        maj=nums[0]
+        cout=1
+        for i in nums[1:]:
+            if cout==0:
+                maj=i
+                cout+=1
+            elif i==maj:
+                cout+=1
+            else:
+                cout-=1
+        return maj
+                    
+            
+            
+        

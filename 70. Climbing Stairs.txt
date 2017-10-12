@@ -1,0 +1,60 @@
+70. Climbing Stairs
+
+C++语言：
+
+方法一：
+
+class Solution {
+public:
+    /*int climbStairs(int n) {
+        if(n<0)
+            return 0;
+        if(n==1)
+            return 1;
+        if(n==2)
+            return 2;
+        return climbStairs(n-1)+climbStairs(n-2);  
+        
+    }time limited error*/
+};
+
+方法二：
+
+class Solution {
+public:
+    int climbStairs(int n) {
+        if (n<3)
+            return n;
+        int onebefore=2;
+        int twobefore=1;
+        int res;
+        for(int i=2;i<n;i++)
+        {
+            res=onebefore+twobefore;
+            twobefore=onebefore;
+            onebefore=res;            
+        }
+        return res;    
+    }
+};
+
+Python语言：
+
+class Solution(object):
+    def climbStairs(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        if n<3:
+            return n
+        onebefore=2
+        twobefore=1
+        res=0
+        for i in range(3,n+1):
+            res=onebefore+twobefore
+            twobefore=onebefore
+            onebefore=res
+        return res
+            
+        
