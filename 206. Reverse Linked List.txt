@@ -3,6 +3,8 @@
 C++语言：
 
 方法一：
+从头至尾梳理指针，将next指向父节点
+
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
@@ -19,6 +21,8 @@ public:
 };
 
 方法二：
+子函数功能为返回链表最后节点并删除
+
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {

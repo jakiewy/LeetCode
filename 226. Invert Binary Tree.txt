@@ -1,0 +1,42 @@
+226. Invert Binary Tree
+
+C++语言
+方法一：
+递归
+
+class Solution {
+public:
+    TreeNode* invertTree(TreeNode* root) {
+        if(!root)
+            return root;
+        invertTree(root->left);
+        invertTree(root->right);        
+        std::swap(root->left,root->right);
+        return root;
+    }
+};
+
+方法二：
+非递归
+
+class Solution {
+public:
+    TreeNode* invertTree(TreeNode* root) {
+        stack <TreeNode*> stk;
+        TreeNode *top; 
+        if(!root)
+            return root;
+        stk.push(root);
+        while(!stk.empty())
+        {
+            top=stk.top();
+            stk.pop();
+            if(top->left)
+                stk.push(top->left);
+            if(top->right)
+                stk.push(top->right);
+            std::swap(top->left,top->right);
+        }
+        return root;
+    }
+};
