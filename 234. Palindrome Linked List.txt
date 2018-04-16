@@ -1,0 +1,40 @@
+234. Palindrome Linked List
+
+C++语言
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        ListNode *slow,*fast,*pre,*tmp;
+        slow=fast=head;
+        pre=NULL;
+        while(fast && fast->next)
+        {
+            fast=fast->next->next;
+            //反转前一部分单链表
+            tmp=slow;
+            slow=slow->next;
+            tmp->next=pre;
+            pre=tmp;
+        }
+        if(fast!=NULL)
+        {
+            slow=slow->next;
+        }
+        while(pre && slow)
+        {
+            if(pre->val != slow->val)
+                return false;
+            pre=pre->next;
+            slow=slow->next;
+        }
+        return true;
+    }
+};
