@@ -1,0 +1,43 @@
+283. Move Zeroes
+
+C++语言:
+
+第一种方法:
+删掉所有0并计数，在末尾添加
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int cout=0;
+        for(int i=0;i<nums.size();i++)
+        {
+            if(nums[i]==0)
+            {
+                nums.erase(nums.begin()+i);
+                cout++;
+                i--;
+            }
+        }
+        for(int i=0;i<cout;i++)
+        {
+            nums.push_back(0);
+        }
+    }
+};
+
+
+Python语言:
+
+第一种方法：
+删掉所有0并计数，在末尾添加
+class Solution(object):
+    def moveZeroes(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
+        cout=0
+        while 0 in nums:
+            nums.remove(0)
+            cout+=1
+        for i in range(cout):
+            nums.append(0)
