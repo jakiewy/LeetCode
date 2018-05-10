@@ -1,0 +1,56 @@
+461. Hamming Distance
+
+C++语言:
+
+第一种方法:
+
+class Solution {
+public:
+    int hammingDistance(int x, int y) {
+        int diff,res=0;
+        diff=x^y;
+        while(diff)
+        {
+            if(diff & 1)
+                res++;
+            diff >>= 1;
+        }
+        return res;
+    }
+};
+
+第二种方法：
+
+class Solution {
+public:
+    int hammingDistance(int x, int y) {
+        int diff,res=0;
+        diff=x^y;
+        while (diff) 
+        {
+            ++res;
+            diff &= diff - 1;
+        }
+        return res;
+    }
+};
+
+Python语言:
+
+第一种方法：
+
+class Solution(object):
+    def hammingDistance(self, x, y):
+        res=0
+        diff=x^y
+        while diff != 0 :
+            if diff & 1 !=0 :
+                res += 1
+            diff >>= 1
+        return res; 
+
+第二种方法：
+
+class Solution(object):
+    def hammingDistance(self, x, y):
+        return bin(x^y).count('1')
