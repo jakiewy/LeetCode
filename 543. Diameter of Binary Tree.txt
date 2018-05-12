@@ -1,0 +1,37 @@
+﻿543. Diameter of Binary Tree
+
+C++语言:
+对于理解递归有所帮助
+class Solution {
+public:
+    int path = 0;
+    int depth(TreeNode* root)
+    {
+        int left,right;
+        if(!root)
+            return 0;
+        left = depth(root->left);
+        right = depth(root->right);
+        path = max(left + right, path);
+        return max(left, right) + 1;
+    }
+    int diameterOfBinaryTree(TreeNode* root) {
+        depth(root);
+        return path;
+    }
+};
+
+Python语言:
+class Solution(object):
+    path = 0
+    def depth(self, root):
+        if root is None:
+            return 0
+        left = self.depth(root.left)
+        right = self.depth(root.right)
+        self.path = max(left + right, self.path)
+        return max(left, right)+1
+    
+    def diameterOfBinaryTree(self, root):
+        self.depth(root)
+        return self.path

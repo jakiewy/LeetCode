@@ -1,0 +1,37 @@
+﻿538. Convert BST to Greater Tree
+
+C++语言:
+对于理解递归有所帮助
+class Solution {
+public:
+    int sum = 0;
+    void deal (TreeNode* root)
+    {
+        if(!root)
+            return;
+        deal(root->right);
+        root->val += sum;
+        sum = root->val;
+        deal(root->left);
+        return;
+    }
+    TreeNode* convertBST(TreeNode* root) {
+        deal(root);
+        return root;
+    }
+};
+
+Python语言:
+class Solution(object):
+    cur_sum = 0
+    def deal(self,root):
+        if root is None:
+            return
+        self.deal(root.right)
+        self.cur_sum += root.val
+        root.val = self.cur_sum
+        self.deal(root.left)
+        return
+    def convertBST(self, root):
+        self.deal(root)
+        return root
