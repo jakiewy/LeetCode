@@ -1,0 +1,56 @@
+﻿581. Shortest Unsorted Continuous Subarray
+
+C++语言:
+第一种方法:
+自己的笨方法，找不是最小的第一个下标，再找不是最大的第一个下标
+class Solution {
+public:
+    int findUnsortedSubarray(vector<int>& nums) {
+        bool flag=true;
+        int j,first,last;
+        for(int i=0;i<nums.size()-1;i++)
+        {
+            j=i+1;
+            while(j<nums.size())
+            {
+                if(nums[i]>nums[j])
+                {
+                    flag = false;
+                    first = i;
+                    break;
+                }
+                j++;    
+            }
+            if(!flag)
+                break;
+        }
+        if(!flag)
+        {
+            bool flag = true;
+            for(int i=nums.size()-1;i>0;i--)
+            {
+                j=i-1;
+                while(j>=0)
+                {
+                    
+                    if(nums[i]<nums[j])
+                    {
+                        cout<<i;
+                        flag = false;
+                        last = i;
+                        break;
+                    }
+                    j--;
+                }
+                if(!flag)
+                    break;
+            }
+        }
+        if(flag)
+            return 0;
+        else
+            return last-first+1;
+    }
+};
+
+Python语言:

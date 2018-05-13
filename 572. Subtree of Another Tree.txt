@@ -1,0 +1,58 @@
+﻿572. Subtree of Another Tree
+
+C++语言:
+class Solution {
+public:
+    bool isSame(TreeNode* s, TreeNode* t)
+    {
+        if(!s && !t)
+            return true;
+        if(!s || !t)
+            return false;
+        if(s->val == t->val)
+            return isSame(s->left,t->left) && isSame(s->right,t->right);
+        else
+            return false;
+    }
+    bool isSubtree(TreeNode* s, TreeNode* t) {
+        if((!s && !t) || !t)
+            return true;
+        if(!s)
+            return false;
+        if(isSame(s,t))
+            return true;
+        else
+            return isSubtree(s->left,t) || isSubtree(s->right,t); 
+    }
+};
+
+Python语言:
+第一种方法：
+尝试在函数中定义函数
+class Solution(object):
+    def isSubtree(self, s, t):
+        if s is None:
+            return False
+        
+        def isSame(s,t):
+            if s is None and t is None:
+                return True
+            else:
+                if s is None or t is None:
+                    return False
+            if s.val == t.val:
+                return isSame(s.left, t.left) and isSame(s.right, t.right)
+            else:
+                return False
+            
+        if isSame(s,t):
+            return True
+        return self.isSubtree(s.left,t) or self.isSubtree(s.right,t)  
+
+第二种方法：
+应用Python特性
+class Solution(object):
+    def isSubtree(self, s, t):
+        def convert(root):
+            return '^'+str(root.val) + convert(root.left) + convert(root.right) if root else '*'
+        return convert(t) in convert(s)
