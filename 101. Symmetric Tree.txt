@@ -1,7 +1,7 @@
 101. Symmetric Tree
+C++语言：
 
 Python语言：
-
 方法一：
 递归
 class Solution(object):
