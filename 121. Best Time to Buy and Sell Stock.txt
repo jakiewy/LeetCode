@@ -1,0 +1,32 @@
+121. Best Time to Buy and Sell Stock
+
+C++语言:
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        if (prices.empty())
+            return 0;
+        int min_price = INT_MAX,profit = 0;
+        for(int i=0;i<prices.size();i++)
+        {
+            min_price = min(min_price, prices[i]);
+            profit = max(profit,prices[i]-min_price);
+        }
+        return profit;
+    }
+};
+Python语言:
+class Solution(object):
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        if not prices:
+            return 0
+        min_price = prices[0] 
+        profit = 0
+        for i in prices:
+            min_price = min(i,min_price)
+            profit = max(i-min_price,profit)
+        return profit

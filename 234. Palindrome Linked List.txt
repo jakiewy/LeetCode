@@ -2,14 +2,6 @@
 
 C++语言:
 
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
@@ -41,12 +33,6 @@ public:
 };
 
 Python语言:
-
-# Definition for singly-linked list.
-# class ListNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
 
 class Solution(object):
     def isPalindrome(self, head):

@@ -1,0 +1,61 @@
+438. Find All Anagrams in a String
+
+C++语言:
+
+滑动窗口（sliding windows）方法
+class Solution {
+public:
+    vector<int> findAnagrams(string s, string p) {
+        vector<int> res;
+        vector<int> sv(26,0);
+        vector<int> pv(26,0);
+        
+        if(s.size()<p.size())
+            return res;
+        for(int i=0;i<p.size();i++)
+        {
+            sv[s[i]-'a']++;
+            pv[p[i]-'a']++;
+        }
+        if(sv==pv)
+            res.push_back(0);
+        for(int i=p.size();i<s.size();i++)
+        {
+            sv[s[i]-'a']++;
+            sv[s[i-p.size()]-'a']--;
+            if(sv==pv)
+               res.push_back(i-p.size()+1);
+       }     
+        return res;
+    }
+};
+
+
+Python语言:
+
+滑动窗口（sliding windows）方法，注意ord()函数的使用
+class Solution(object):
+    def findAnagrams(self, s, p):
+        """
+        :type s: str
+        :type p: str
+        :rtype: List[int]
+        """
+        res = []
+        pv,sv = [0]*26,[0]*26
+        
+        if len(s)<len(p):
+            return res
+        
+        for i in range(len(p)):
+            pv[ord(p[i])-ord('a')]+=1
+            sv[ord(s[i])-ord('a')]+=1
+        if pv == sv:
+            res.append(0)
+            
+        for i in range(len(p),len(s)):
+            sv[ord(s[i])-ord('a')]+=1
+            sv[ord(s[i-len(p)])-ord('a')]-=1
+            if pv == sv:
+                res.append(i-len(p)+1)
+        return res

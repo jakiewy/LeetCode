@@ -1,0 +1,67 @@
+617. Merge Two Binary Trees
+
+C++语言:
+
+第一种方法:
+返回一个新的二叉树
+class Solution {
+public:
+	//return a new tree
+    TreeNode* mergeTrees(TreeNode* t1, TreeNode* t2) {
+        TreeNode* res;
+        if(!t1 && !t2)
+            return NULL;
+        else
+        {
+            res = new TreeNode((t1?t1->val:0) + (t2?t2->val:0));      
+            res->left = mergeTrees(t1?t1->left:NULL,t2?t2->left:NULL);
+            res->right = mergeTrees(t1?t1->right:NULL,t2?t2->right:NULL);
+        }
+        return res;  
+    }
+};
+第二种方法：
+不建立新的二叉树
+class Solution {
+public:
+    //no new tree
+    TreeNode* mergeTrees(TreeNode* t1, TreeNode* t2) {
+        if(t1 && t2)
+        {
+            t1->val += t2->val;
+            t1->left = mergeTrees(t1->left,t2->left);
+            t1->right = mergeTrees(t1->right,t2->right);
+            return t1;
+        }
+        else
+            return t1?t1:t2;
+    }
+};
+Python语言:
+
+第一种方法：
+class Solution(object):
+    def mergeTrees(self, t1, t2):
+        if (t1 is None) and (t2 is None):
+            return None
+        if t1 and t2:
+            node = TreeNode(t1.val + t2.val)
+            node.left = self.mergeTrees(t1.left,t2.left)
+            node.right = self.mergeTrees(t1.right,t2.right)
+            return node
+        else:
+	        node = TreeNode(t1.val if t1 else t2.val)
+	        node.left = self.mergeTrees(t1.left if t1 else None,t2.left if t2 else None)
+	        node.right = self.mergeTrees(t1.right if t1 else None,t2.right if t2 else None)
+	        return node
+
+第二种方法：
+class Solution(object):
+    def mergeTrees(self, t1, t2):
+        if t1 and t2:
+            t1.val += t2.val
+            t1.left = self.mergeTrees(t1.left,t2.left)
+            t1.right = self.mergeTrees(t1.right,t2.right)
+            return t1
+        else:
+            return t1 or t2
