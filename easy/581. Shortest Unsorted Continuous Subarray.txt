@@ -53,4 +53,41 @@ public:
     }
 };
 
+第二种方法：
+class Solution {
+public:
+    int findUnsortedSubarray(vector<int>& nums) {
+        int l=0,r=nums.size()-1,MAX=INT_MIN,MIN=INT_MAX;
+        for(int i=l,j=r;i<nums.size();i++,j--)
+        {
+            MAX = max(nums[i],MAX);
+            if(MAX!=nums[i])
+                l=i;
+            MIN = min(nums[j],MIN);
+            if(MIN!=nums[j])
+                r=j;
+        }
+        if(l == 0)
+            return 0;
+        return l-r+1;
+    }
+};
+
 Python语言:
+class Solution(object):
+    def findUnsortedSubarray(self, nums):
+        l=0
+        r=len(nums)-1
+        MAX=-sys.maxint-1
+        MIN=sys.maxint
+        for i in range(len(nums)):
+            MAX = max(nums[i],MAX)
+            if MAX!=nums[i]:
+                l=i
+            j = len(nums)-1-i
+            MIN = min(nums[j],MIN)
+            if MIN!=nums[j]:
+                r=j
+        if l == 0:
+            return 0
+        return l-r+1

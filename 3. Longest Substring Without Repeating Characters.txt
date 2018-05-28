@@ -1,0 +1,50 @@
+3. Longest Substring Without Repeating Characters
+
+C++语言：
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        vector <int> dict(256,-1);
+        int ans=0,start=-1;
+        for (int i=0;i<s.length();i++)
+        {
+            if(dict[s[i]] > start)
+                start = dict[s[i]];
+            dict[s[i]]=i;
+            ans = max(ans,i-start);
+        }
+        return ans;
+    }
+};
+
+Python语言：
+第一种方法：
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        sub = []
+        ans = 0
+        for i in range(len(s)):
+            temp=-1
+            for j in range(len(sub)):
+                if s[i]==sub[j]:
+                    temp = j
+            for j in range(temp+1):
+                del sub[0]
+            sub.append(s[i])
+            if len(sub)>ans:
+                ans=len(sub)
+        return ans
+
+第二种方法：
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        dic = {}
+        start = 0
+        ans = 0
+        for i,c in enumerate(s):
+            if c in dic and start <= dic[c]:
+                start = dic[c]+1
+            else:
+                ans = max(ans,i-start+1)
+            dic[c] = i
+        return ans
