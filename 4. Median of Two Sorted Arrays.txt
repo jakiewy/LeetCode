@@ -1,0 +1,73 @@
+4. Median of Two Sorted Arrays
+
+C++语言：
+
+第一种方法：
+时间复杂度O(n),总体思路就是找到第（n1+n2）/2 小的数
+class Solution
+{
+public:
+    double findMedianSortedArrays(vector<int> &nums1, vector<int> &nums2)
+    {
+        int f1, f2, n1, n2, flag;
+        f1 = f2 = -1;
+        n1 = nums1.size();
+        n2 = nums2.size();
+        //数组为空的情况
+        if(n1 == 0 && n2 == 0)
+        	return 0;
+        if(n2 == 0)
+        	return n1%2 == 0? ((double)nums1[n1/2-1]+nums1[n1/2])/2 : nums1[n1/2];
+        if(n1 == 0)
+        	return n2%2 == 0? ((double)nums2[n2/2-1]+nums2[n2/2])/2 : nums2[n2/2];
+
+        for(int i = 0; i < (n1 + n2)/2; i++)
+        {
+            if(( (f1+1)<n1 && nums1[f1+1] < nums2[f2+1])|| (f2+1) >= n2)
+            {
+                f1++;
+                flag = 1;
+            }
+            else
+            {
+                f2++;
+                flag = 2;
+            }
+        }
+        //总数为奇数的情况
+        if((n1 + n2) % 2)
+        {
+            if(( (f1+1)<n1 && nums1[f1+1] < nums2[f2+1])|| (f2+1) >= n2)
+            {
+                f1++;
+                flag = 1;
+            }
+            else
+            {
+                f2++;
+                flag = 2;
+            }
+            return flag == 1 ? nums1[f1] : nums2[f2];
+        }
+        //总数为偶数的情况
+        else
+        {
+            int temp = (flag == 1 ? nums1[f1] : nums2[f2]);
+            cout<<temp;
+            if(( (f1+1)<n1 && nums1[f1+1] < nums2[f2+1])|| (f2+1) >= n2)
+            {
+                f1++;
+                flag = 1;
+            }
+            else
+            {
+                f2++;
+                flag = 2;
+            }
+            return (double)(temp + (flag == 1 ? nums1[f1] : nums2[f2]))/2;
+        }
+
+    }
+};
+
+第二种方法：
