@@ -15,15 +15,15 @@ public:
         n2 = nums2.size();
         //数组为空的情况
         if(n1 == 0 && n2 == 0)
-        	return 0;
+            return 0;
         if(n2 == 0)
-        	return n1%2 == 0? ((double)nums1[n1/2-1]+nums1[n1/2])/2 : nums1[n1/2];
+            return n1 % 2 == 0 ? ((double)nums1[n1 / 2 - 1] + nums1[n1 / 2]) / 2 : nums1[n1 / 2];
         if(n1 == 0)
-        	return n2%2 == 0? ((double)nums2[n2/2-1]+nums2[n2/2])/2 : nums2[n2/2];
+            return n2 % 2 == 0 ? ((double)nums2[n2 / 2 - 1] + nums2[n2 / 2]) / 2 : nums2[n2 / 2];
 
-        for(int i = 0; i < (n1 + n2)/2; i++)
+        for(int i = 0; i < (n1 + n2) / 2; i++)
         {
-            if(( (f1+1)<n1 && nums1[f1+1] < nums2[f2+1])|| (f2+1) >= n2)
+            if(( (f1 + 1) < n1 && nums1[f1 + 1] < nums2[f2 + 1]) || (f2 + 1) >= n2)
             {
                 f1++;
                 flag = 1;
@@ -37,7 +37,7 @@ public:
         //总数为奇数的情况
         if((n1 + n2) % 2)
         {
-            if(( (f1+1)<n1 && nums1[f1+1] < nums2[f2+1])|| (f2+1) >= n2)
+            if(( (f1 + 1) < n1 && nums1[f1 + 1] < nums2[f2 + 1]) || (f2 + 1) >= n2)
             {
                 f1++;
                 flag = 1;
@@ -53,8 +53,8 @@ public:
         else
         {
             int temp = (flag == 1 ? nums1[f1] : nums2[f2]);
-            cout<<temp;
-            if(( (f1+1)<n1 && nums1[f1+1] < nums2[f2+1])|| (f2+1) >= n2)
+            cout << temp;
+            if(( (f1 + 1) < n1 && nums1[f1 + 1] < nums2[f2 + 1]) || (f2 + 1) >= n2)
             {
                 f1++;
                 flag = 1;
@@ -64,7 +64,7 @@ public:
                 f2++;
                 flag = 2;
             }
-            return (double)(temp + (flag == 1 ? nums1[f1] : nums2[f2]))/2;
+            return (double)(temp + (flag == 1 ? nums1[f1] : nums2[f2])) / 2;
         }
 
     }
